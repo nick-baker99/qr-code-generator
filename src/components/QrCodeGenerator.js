@@ -8,6 +8,8 @@ const QrCodeGenerator = () => {
   const [url, setUrl] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  // default QR size is 200 pixels
+  const [size, setSize] = useState(200);
 
   const qrCodeRef = useRef(null);
   // download button handler
@@ -32,6 +34,14 @@ const QrCodeGenerator = () => {
       setErrorMsg("Enter a URL to generate QR code");
       return;
     }
+    if (size <= 0) {
+      setErrorMsg("Invalid size");
+      return;
+    }
+    if (size > 3000) {
+      setErrorMsg("Size must be below 3000 pixels");
+      return;
+    }
     // remove error if set
     if (errorMsg) setErrorMsg('');
     // make QR code visible
@@ -51,11 +61,21 @@ const QrCodeGenerator = () => {
       <h1>Generate a QR Code</h1>
       <div className="qr_wrapper">
         <div className="qr-input">
+          <label>QR Code URL</label>
           <input 
             type="text" 
             placeholder="Enter URL" 
             value={url} 
             onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+        <div className="qr-input">
+          <label>Image Pixels</label>
+          <input 
+            type="number" 
+            placeholder="Size" 
+            value={size} 
+            onChange={(e) => setSize(e.target.value)}
           />
         </div>
         <div className="error-msg">
@@ -70,8 +90,9 @@ const QrCodeGenerator = () => {
         </button>
         {isVisible && (
           <div className="qr-download">
+            <label>Preview</label>
             <div className="qr-image">
-              <QRCode value={url} size={200} ref={qrCodeRef} />
+              <QRCode value={url} size={size} ref={qrCodeRef} />
             </div>
             <button 
               onClick={downloadQRCode} 

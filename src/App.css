@@ -41,6 +41,14 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
 .qr-image {
   max-width: 200px;
   max-height: 200px;
@@ -62,6 +70,17 @@ input[type="text"] {
   height: 50px;
   padding-left: 15px;
   width: 350px;
+  max-width: 90%;
+  border-radius: 5px;
+  border: 2px solid #999;
+  font-size: 1rem;
+}
+
+input[type="number"] {
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 5px;
+  width: 90px;
   max-width: 90%;
   border-radius: 5px;
   border: 2px solid #999;
