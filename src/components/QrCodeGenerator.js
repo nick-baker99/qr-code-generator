@@ -6,17 +6,20 @@ import { useRef } from 'react';
 
 const QrCodeGenerator = () => {
   const [url, setUrl] = useState("");
+  const [qrUrl, setQrUrl] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   // default QR size is 200 pixels
-  const [size, setSize] = useState(200);
+  const [size, setSize] = useState(200); // input size
+  const [qrSize, setQrSize] = useState(200); // size used for rendering the QR code
 
   const qrCodeRef = useRef(null);
   // download button handler
   const downloadQRCode = () => {
     // convert html element to png image and download
     htmlToImage
-      .toPng(qrCodeRef.current)
+      // Set the dimensions to the full size
+      .toPng(qrCodeRef.current, { width: size, height: size })
       .then(function (dataUrl) {
         const link = document.createElement("a");
         link.href = dataUrl;
@@ -38,27 +41,31 @@ const QrCodeGenerator = () => {
       setErrorMsg("Invalid size");
       return;
     }
-    if (size > 3000) {
+    if (size > 1080) {
       setErrorMsg("Size must be below 3000 pixels");
       return;
     }
+
     // remove error if set
     if (errorMsg) setErrorMsg('');
+    setQrUrl(url);
+    // Update QR code size only when the button is clicked
+    setQrSize(size); 
     // make QR code visible
     setIsVisible(true);
   }
   // handler for reset button
   const resetQrCode = () => {
     setUrl('');
+    setSize(200);
     setIsVisible(false);
   }
 
-  var btnClass = "generate-btn";
-  if (url) btnClass += " active";
+  const btnClass = `generate-btn${url ? " active" : ""}`;
 
   return (
     <div className="qr-container">
-      <h1>Generate a QR Code</h1>
+      <h1>QR Code Generator</h1>
       <div className="qr_wrapper">
         <div className="qr-input">
           <label>QR Code URL</label>
@@ -67,6 +74,7 @@ const QrCodeGenerator = () => {
             placeholder="Enter URL" 
             value={url} 
             onChange={(e) => setUrl(e.target.value)}
+            maxlength="7000"
           />
         </div>
         <div className="qr-input">
@@ -77,6 +85,7 @@ const QrCodeGenerator = () => {
             value={size} 
             onChange={(e) => setSize(e.target.value)}
           />
+          <span className="note">(Max 1080px)</span>
         </div>
         <div className="error-msg">
           <span>{errorMsg}</span>
@@ -92,7 +101,7 @@ const QrCodeGenerator = () => {
           <div className="qr-download">
             <label>Preview</label>
             <div className="qr-image">
-              <QRCode value={url} size={size} ref={qrCodeRef} />
+              <QRCode value={qrUrl} size={qrSize} ref={qrCodeRef} />
             </div>
             <button 
               onClick={downloadQRCode} 
