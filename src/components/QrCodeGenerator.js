@@ -62,6 +62,7 @@ const QrCodeGenerator = () => {
   }
 
   const btnClass = `generate-btn${url ? " active" : ""}`;
+  const btnDisabled = url ? false : true;
 
   return (
     <div className="qr-container">
@@ -74,7 +75,7 @@ const QrCodeGenerator = () => {
             placeholder="Enter URL" 
             value={url} 
             onChange={(e) => setUrl(e.target.value)}
-            maxlength="7000"
+            maxLength="7000"
           />
         </div>
         <div className="qr-input">
@@ -94,6 +95,7 @@ const QrCodeGenerator = () => {
           onClick={QrCodeHandler} 
           title="Generate QR Code" 
           className={btnClass}
+          disabled={btnDisabled}
         >
           Generate
         </button>
