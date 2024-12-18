@@ -2,6 +2,10 @@
 
 The **QR Code Generator** is a React-based web application that allows users to easily create and download QR codes. This tool is perfect for generating QR codes for URLs, which can be used for websites, online resources, or digital marketing campaigns. The application includes a user-friendly interface, customizable size options, and high-resolution image downloads.
 
+## Demo
+
+[View demo](https://qr-code-generator-5abe3.web.app/)
+
 ![qr-code-2](https://github.com/user-attachments/assets/3800cb74-79d2-46d2-b88e-1180430afec7)
 
 
