@@ -30,6 +30,7 @@ const QrCodeGenerator = () => {
         link.href = dataUrl;
         link.download = "qr-code.png";
         link.click();
+        logEvent(analytics, "download_qr");
       })
       .catch(function (error) {
         console.error("Error generating QR code:", error);
@@ -67,6 +68,7 @@ const QrCodeGenerator = () => {
     setUrl('');
     setSize(200);
     setIsVisible(false);
+    logEvent(analytics, "reset_qr");
   }
 
   const btnClass = `generate-btn${url ? " active" : ""}`;
@@ -74,7 +76,7 @@ const QrCodeGenerator = () => {
 
   return (
     <div className="qr-container">
-      <h1>QR Code Generator testing</h1>
+      <h1>QR Code Generator</h1>
       <div className="qr_wrapper">
         <div className="qr-input">
           <label>QR Code URL</label>
