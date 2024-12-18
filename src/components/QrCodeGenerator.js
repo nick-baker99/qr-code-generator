@@ -3,6 +3,8 @@ import { useState } from 'react';
 import QRCode from 'react-qr-code';
 import * as htmlToImage from "html-to-image";
 import { useRef } from 'react';
+import { getAnalytics, logEvent } from "firebase/analytics";
+
 
 const QrCodeGenerator = () => {
   const [url, setUrl] = useState("");
@@ -12,6 +14,9 @@ const QrCodeGenerator = () => {
   // default QR size is 200 pixels
   const [size, setSize] = useState(200); // input size
   const [qrSize, setQrSize] = useState(200); // size used for rendering the QR code
+
+  // Retrieve the initialized analytics instance
+  const analytics = getAnalytics();
 
   const qrCodeRef = useRef(null);
   // download button handler
@@ -53,6 +58,9 @@ const QrCodeGenerator = () => {
     setQrSize(size); 
     // make QR code visible
     setIsVisible(true);
+
+    // log event for google analytics
+    logEvent(analytics, "generate_qr");
   }
   // handler for reset button
   const resetQrCode = () => {
