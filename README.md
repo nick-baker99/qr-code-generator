@@ -4,7 +4,7 @@ The **QR Code Generator** is a React-based web application that allows users to 
 
 ## Demo
 
-[View demo](https://qr-code-generator-5abe3.web.app/)
+<a href="https://qr-code-generator-5abe3.web.app/" target="_blank" rel="noopener">View demo</a>
 
 ![qr-code-2](https://github.com/user-attachments/assets/3800cb74-79d2-46d2-b88e-1180430afec7)
 
