@@ -107,6 +107,7 @@ input[type="number"] {
 .generate-btn.active {
   background-color: #1f75fe;
   color: #fff;
+  cursor: pointer;
 }
 
 .download-btn {
