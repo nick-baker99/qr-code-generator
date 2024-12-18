@@ -59,7 +59,7 @@ const QrCodeGenerator = () => {
     // make QR code visible
     setIsVisible(true);
 
-    // log event for google analytics
+    // log event for google analytics 4
     logEvent(analytics, "generate_qr");
   }
   // handler for reset button
