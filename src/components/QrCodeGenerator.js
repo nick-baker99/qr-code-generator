@@ -74,7 +74,7 @@ const QrCodeGenerator = () => {
 
   return (
     <div className="qr-container">
-      <h1>QR Code Generator</h1>
+      <h1>QR Code Generator testing</h1>
       <div className="qr_wrapper">
         <div className="qr-input">
           <label>QR Code URL</label>
