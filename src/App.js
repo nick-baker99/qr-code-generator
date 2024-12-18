@@ -3,7 +3,8 @@ import QrCodeGenerator from './components/QrCodeGenerator';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics";
+import { useEffect } from 'react';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -22,6 +23,10 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 function App() {
+  useEffect(() => {
+    logEvent(analytics, "page_view");
+  }, []);
+  
   return (
     <div className="App">
       <QrCodeGenerator />
